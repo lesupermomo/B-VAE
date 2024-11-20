@@ -41,6 +41,14 @@ Run the following command to download the dataset:
 ./download_dsprites.sh
 ```
 
+#### Start a viz session to monitor results
+
+```bash
+python -m visdom.server
+```
+You can then monitor the experiments plots and results at http://localhost:8097/.
+
+
 #### Run the Experiment
 Start running an experiment with the following command:
 
