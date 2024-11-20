@@ -1,22 +1,15 @@
 """main.py"""
 
-import argparse
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
-import numpy as np
-import torch
+import argparse
 
 from solver import Solver
 from utils import str2bool
 
-torch.backends.cudnn.enabled = True
-torch.backends.cudnn.benchmark = True
-
 
 def main(args):
-    seed = args.seed
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    np.random.seed(seed)
 
     net = Solver(args)
 
@@ -31,6 +24,7 @@ if __name__ == "__main__":
 
     parser.add_argument('--train', default=True, type=str2bool, help='train or traverse')
     parser.add_argument('--seed', default=1, type=int, help='random seed')
+    parser.add_argument('--gpu', default=[], type=int, nargs='+', help='cuda visible devices')
     parser.add_argument('--cuda', default=True, type=str2bool, help='enable cuda')
     parser.add_argument('--max_iter', default=1e6, type=float, help='maximum training iteration')
     parser.add_argument('--batch_size', default=64, type=int, help='batch size')

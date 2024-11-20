@@ -17,6 +17,8 @@ from utils import cuda, grid2gif
 from model import BetaVAE_H, BetaVAE_B
 from dataset import return_data
 
+torch.backends.cudnn.enabled = True
+torch.backends.cudnn.benchmark = True
 
 def reconstruction_loss(x, x_recon, distribution):
     batch_size = x.size(0)
@@ -73,7 +75,15 @@ class DataGather(object):
 
 class Solver(object):
     def __init__(self, args):
+
+        seed = args.seed
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed(seed)
+        
         self.use_cuda = args.cuda and torch.cuda.is_available()
+        os.environ["CUDA_VISIBLE_DEVICES"] = ",".join(map(str,args.gpu))
+        torch.cuda.device_count = lambda: len(list(os.environ["CUDA_VISIBLE_DEVICES"].split(",") if "CUDA_VISIBLE_DEVICES" in os.environ else []))
+
         self.max_iter = args.max_iter
         self.global_iter = 0
 
@@ -164,7 +174,7 @@ class Solver(object):
                 if self.objective == 'H':
                     beta_vae_loss = recon_loss + self.beta*total_kld
                 elif self.objective == 'B':
-                    C = torch.clamp(self.C_max/self.C_stop_iter*self.global_iter, 0, self.C_max.data[0])
+                    C = torch.clamp(self.C_max/self.C_stop_iter*self.global_iter, 0, self.C_max.item())
                     beta_vae_loss = recon_loss + self.gamma*(total_kld-C).abs()
 
                 self.optim.zero_grad()
@@ -176,10 +186,10 @@ class Solver(object):
                                        mu=mu.mean(0).data, var=logvar.exp().mean(0).data,
                                        recon_loss=recon_loss.data, total_kld=total_kld.data,
                                        dim_wise_kld=dim_wise_kld.data, mean_kld=mean_kld.data)
-
-                if self.global_iter%self.display_step == 0:
+                
+                if self.global_iter % self.display_step == 0:
                     pbar.write('[{}] recon_loss:{:.3f} total_kld:{:.3f} mean_kld:{:.3f}'.format(
-                        self.global_iter, recon_loss.data[0], total_kld.data[0], mean_kld.data[0]))
+                        self.global_iter, recon_loss.item(), total_kld.item(), mean_kld.item()))
 
                     var = logvar.exp().mean(0).data
                     var_str = ''
@@ -188,7 +198,7 @@ class Solver(object):
                     pbar.write(var_str)
 
                     if self.objective == 'B':
-                        pbar.write('C:{:.3f}'.format(C.data[0]))
+                        pbar.write('C:{:.3f}'.format(C.item()))
 
                     if self.viz_on:
                         self.gather.insert(images=x.data)
@@ -415,7 +425,7 @@ class Solver(object):
             for i, key in enumerate(Z.keys()):
                 for j, val in enumerate(interpolation):
                     save_image(tensor=gifs[i][j].cpu(),
-                               filename=os.path.join(output_dir, '{}_{}.jpg'.format(key, j)),
+                               fp=os.path.join(output_dir, '{}_{}.jpg'.format(key, j)),
                                nrow=self.z_dim, pad_value=1)
 
                 grid2gif(os.path.join(output_dir, key+'*.jpg'),
