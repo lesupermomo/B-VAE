@@ -164,7 +164,7 @@ class Solver(object):
                 if self.objective == 'H':
                     beta_vae_loss = recon_loss + self.beta*total_kld
                 elif self.objective == 'B':
-                    C = torch.clamp(self.C_max/self.C_stop_iter*self.global_iter, 0, self.C_max.data[0])
+                    C = torch.clamp(self.C_max/self.C_stop_iter*self.global_iter, 0, self.C_max.item())
                     beta_vae_loss = recon_loss + self.gamma*(total_kld-C).abs()
 
                 self.optim.zero_grad()
@@ -176,10 +176,10 @@ class Solver(object):
                                        mu=mu.mean(0).data, var=logvar.exp().mean(0).data,
                                        recon_loss=recon_loss.data, total_kld=total_kld.data,
                                        dim_wise_kld=dim_wise_kld.data, mean_kld=mean_kld.data)
-
-                if self.global_iter%self.display_step == 0:
+                
+                if self.global_iter % self.display_step == 0:
                     pbar.write('[{}] recon_loss:{:.3f} total_kld:{:.3f} mean_kld:{:.3f}'.format(
-                        self.global_iter, recon_loss.data[0], total_kld.data[0], mean_kld.data[0]))
+                        self.global_iter, recon_loss.item(), total_kld.item(), mean_kld.item()))
 
                     var = logvar.exp().mean(0).data
                     var_str = ''
@@ -188,7 +188,7 @@ class Solver(object):
                     pbar.write(var_str)
 
                     if self.objective == 'B':
-                        pbar.write('C:{:.3f}'.format(C.data[0]))
+                        pbar.write('C:{:.3f}'.format(C.item()))
 
                     if self.viz_on:
                         self.gather.insert(images=x.data)
