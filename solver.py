@@ -17,6 +17,8 @@ from utils import cuda, grid2gif
 from model import BetaVAE_H, BetaVAE_B
 from dataset import return_data
 
+torch.backends.cudnn.enabled = True
+torch.backends.cudnn.benchmark = True
 
 def reconstruction_loss(x, x_recon, distribution):
     batch_size = x.size(0)
@@ -73,7 +75,15 @@ class DataGather(object):
 
 class Solver(object):
     def __init__(self, args):
+
+        seed = args.seed
+        torch.manual_seed(seed)
+        torch.cuda.manual_seed(seed)
+        
         self.use_cuda = args.cuda and torch.cuda.is_available()
+        os.environ["CUDA_VISIBLE_DEVICES"] = ",".join(map(str,args.gpu))
+        torch.cuda.device_count = lambda: len(list(os.environ["CUDA_VISIBLE_DEVICES"].split(",") if "CUDA_VISIBLE_DEVICES" in os.environ else []))
+
         self.max_iter = args.max_iter
         self.global_iter = 0
 
