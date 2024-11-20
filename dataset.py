@@ -9,10 +9,6 @@ from torchvision.datasets import ImageFolder
 from torchvision import transforms
 
 
-def is_power_of_2(num):
-    return ((num & (num - 1)) == 0) and num != 0
-
-
 class CustomImageFolder(ImageFolder):
     def __init__(self, root, transform=None):
         super(CustomImageFolder, self).__init__(root, transform)
