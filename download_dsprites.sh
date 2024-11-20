@@ -19,5 +19,5 @@ if [ ! -d "dsprites-dataset" ]; then
     cd dsprites-dataset
     rm -rf .git* *.md LICENSE *.ipynb *.gif *.hdf5
 else
-    echo "Directory 'dsprites-dataset' already exists. Skipping clone."
+    echo "Directory 'dsprites-dataset' already exists."
 fi
