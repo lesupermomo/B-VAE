@@ -1,3 +1,5 @@
 # Ignore the data directory and its contents
 data/
+checkpoints/
 venv/
+__pycache__/
