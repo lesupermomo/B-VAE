@@ -24,7 +24,9 @@ python3 -m venv venv
 
 #### Activate the Virtual Environment
 
-```source venv/bin/activate```
+```bash
+source venv/bin/activate
+```
 
 #### Install the Required Dependencies
 Install the necessary libraries by running:
