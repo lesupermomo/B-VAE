@@ -75,6 +75,8 @@ elif [ "$1" = "CelebA" ]; then
         exit 0
     fi
 
+    # TODO: DOWNLOAD THE DATASET IF IT IS NOT DOWNLOADED BY USER
+
     # Unzip and organize CelebA dataset
     if [ ! -f "img_align_celeba.zip" ]; then
         echo "Please download img_align_celeba.zip and place it in the current directory."
