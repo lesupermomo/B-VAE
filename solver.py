@@ -81,9 +81,6 @@ class Solver(object):
         torch.cuda.manual_seed(seed)
         
         self.use_cuda = args.cuda and torch.cuda.is_available()
-        os.environ["CUDA_VISIBLE_DEVICES"] = ",".join(map(str,args.gpu))
-        torch.cuda.device_count = lambda: len(list(os.environ["CUDA_VISIBLE_DEVICES"].split(",") if "CUDA_VISIBLE_DEVICES" in os.environ else []))
-
         self.max_iter = args.max_iter
         self.global_iter = 0
 
