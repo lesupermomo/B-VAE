@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-## Run this script as ./prepare_data 3DChairs    or     ./prepare_data dsprites, etc 
+## Run this script as ./prepare_data 3DChairs   or  ./prepare_data dsprites or  ./prepare_data CelebA
 
 # Change to the root directory of the script and create the data directory if it does not exist
 cd "$(dirname "$0")"/.. 
@@ -17,7 +17,7 @@ if [ "$1" = "3DChairs" ]; then
 
     # Check if the dataset already exists in 3DChairs/images folder
     if [ -d "$dataset_dir" ]; then
-        echo "Dataset already exists in $dataset_dir. Exiting."
+        echo "3DChairs dataset already exists. Exiting."
         exit 0
     fi
 
@@ -55,17 +55,19 @@ if [ "$1" = "3DChairs" ]; then
 elif [ "$1" = "dsprites" ]; then
 
     # Create dataset folder if it does not exist
-    if [ ! -d "dsprites-dataset" ]; then
-        echo "Cloning dsprites dataset..."
-        git clone https://github.com/deepmind/dsprites-dataset.git
-        
-        # Remove unnecessary files if cloning was successful
-        cd dsprites-dataset
-        rm -rf .git* *.md LICENSE *.ipynb *.gif *.hdf5
-        echo "dsprites dataset setup complete."
-    else
-        echo "Directory 'dsprites-dataset' already exists."
+    if [ -d "dsprites-dataset" ]; then
+        echo "Dsprites-dataset dataset already exists. Exiting"
+        exit 0
     fi
+
+    echo "Cloning dsprites dataset..."
+    git clone https://github.com/deepmind/dsprites-dataset.git
+    
+    # Remove unnecessary files if cloning was successful
+    cd dsprites-dataset
+    rm -rf .git* *.md LICENSE *.ipynb *.gif *.hdf5
+
+    echo "dsprites dataset setup complete."
 
 elif [ "$1" = "CelebA" ]; then
 
@@ -74,19 +76,19 @@ elif [ "$1" = "CelebA" ]; then
         echo "CelebA dataset already exists. Exiting."
         exit 0
     fi
-
-    # TODO: DOWNLOAD THE DATASET IF IT IS NOT DOWNLOADED BY USER
-
+    
     # Unzip and organize CelebA dataset
     if [ ! -f "img_align_celeba.zip" ]; then
-        echo "Please download img_align_celeba.zip and place it in the current directory."
-        exit 1
+        echo "Downloading CelebA dataset from Google Drive..."
+        gdown "https://drive.google.com/uc?id=0B7EVK8r0v71pZjFTYXZWM3FlRnM"
     fi
 
     echo "Unzipping CelebA dataset..."
     unzip img_align_celeba.zip
     mkdir -p CelebA
     mv img_align_celeba CelebA
+    rm img_align_celeba.zip
+
     echo "CelebA dataset setup complete."
 
 else
