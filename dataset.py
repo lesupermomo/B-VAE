@@ -46,7 +46,7 @@ def return_data(args):
         if not os.path.exists(root):
             import subprocess
             print('Now download 3DChairs')
-            subprocess.call(['./scripts/prepare_data.sh 3DChairs'])
+            subprocess.call(['./scripts/prepare_data.sh','3DChairs'])
             print('Finished')
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
@@ -59,7 +59,7 @@ def return_data(args):
         if not os.path.exists(root):
             import subprocess
             print('Now download CelebA')
-            subprocess.call(['./scripts/prepare_data.sh CelebA'])
+            subprocess.call(['./scripts/prepare_data.sh','CelebA'])
             print('Finished')
         transform = transforms.Compose([
             transforms.Resize((image_size, image_size)),
@@ -72,7 +72,7 @@ def return_data(args):
         if not os.path.exists(root):
             import subprocess
             print('Now download dsprites-dataset')
-            subprocess.call(['./scripts/prepare_data.sh dsprites'])
+            subprocess.call(['./scripts/prepare_data.sh','dsprites'])
             print('Finished')
         data = np.load(root, encoding='bytes')
         data = torch.from_numpy(data['imgs']).unsqueeze(1).float()
