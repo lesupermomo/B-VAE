@@ -1,9 +1,31 @@
 # β-VAE
-Github code builds upon [WonKwang Lee and Tony Metger] 
+Github code builds upon [WonKwang Lee and Tony Metger] [1] , introducing key improvements for usability, reproducibility, and performance:
+
+### Contributions
+```markdown
+
+|------ Dataset Management
+|              |---- Integrated scripts to automatically download datasets (3DChairs and CelebA) with a single command.
+
+|------ Code Compatibility and Optimization
+|              |---- Updated the codebase to be compatible with the latest version of PyTorch, enhancing scalability and performance.
+|              |---- Refactored the code to remove unnecessary methods and ensure smooth execution regardless of the working directory from which `main.py` is called.
+
+|------ GPU Selection
+|              |---- Enabled GPU selection to allow running experiments on specified GPUs, providing flexibility for multi-GPU environments.
+
+|------ Project Organization
+|              |---- Created a dedicated `scripts/` directory to streamline the setup and execution of experiments.
+|              |---- Added a `requirements.txt` file that includes all project dependencies for easy environment setup.
+
+|------ Documentation and Reproducibility
+|              |---- Developed detailed documentation on how to set up the environment and reproduce experimental results.
+```
+
 
 Pytorch reproduction of two papers below:
-1. [β-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework, Higgins et al., ICLR, 2017]
-2. [Understanding disentangling in β-VAE, Burgess et al., arxiv:1804.03599, 2018]
+1. [β-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework, Higgins et al., ICLR, 2017] [2]
+2.  [Understanding disentangling in β-VAE, Burgess et al., arxiv:1804.03599, 2018] [3]
 <br>
 
 ## Getting Started 
@@ -34,7 +56,7 @@ pip install -r requirements.txt
 ```
 
 #### Download the Dataset
-Run the following command to download the dataset:
+Run one of the following commands to download a dataset:
 
 ```bash
 ./scripts/prepare_data.sh 3DChairs
@@ -42,15 +64,14 @@ Run the following command to download the dataset:
 ./scripts/prepare_data.sh CelebA
 ```
 
-#### Start a viz session to monitor results
+#### Start a visdom session to monitor results
 
 ```bash
 python -m visdom.server
 ```
-You can then monitor the experiments plots and results at http://localhost:8097/.
+The experiments plots and results will be at http://localhost:8097/.
 
 #### Run the Experiment
-Start running an experiment with the following command:
 
 ```bash
 ./scripts/run_dsprites_B_gamma100_z10.sh
@@ -102,12 +123,11 @@ This will initiate the experiment with the specified parameters.
 
 
 ### Reference
-1. [β-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework, Higgins et al., ICLR, 2017]
-2. [Understanding disentangling in β-VAE, Burgess et al., arxiv:1804.03599, 2018]
-3. [Github Repo]: Tensorflow implementation from [miyosuda]
+1. [WonKwang Lee and Tony Metger]
+2. [β-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework, Higgins et al., ICLR, 2017]
+3. [Understanding disentangling in β-VAE, Burgess et al., arxiv:1804.03599, 2018]
+
 
 [β-VAE: Learning Basic Visual Concepts with a Constrained Variational Framework, Higgins et al., ICLR, 2017]: https://openreview.net/pdf?id=Sy2fzU9gl
 [Understanding disentangling in β-VAE, Burgess et al., arxiv:1804.03599, 2018]: http://arxiv.org/abs/1804.03599
 [WonKwang Lee and Tony Metger]: https://github.com/1Konny/Beta-VAE?tab=readme-ov-file
-[Github Repo]: https://github.com/miyosuda/disentangled_vae
-[miyosuda]: https://github.com/miyosuda
