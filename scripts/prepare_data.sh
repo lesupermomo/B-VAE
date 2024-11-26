@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-## Run this script as ./prepare_data 3DChairs   or  ./prepare_data dsprites or  ./prepare_data CelebA
+## Run this script as ./prepare_data.sh 3DChairs   or  ./prepare_data.sh dsprites or  ./prepare_data.sh CelebA
 
 # Change to the root directory of the script and create the data directory if it does not exist
 cd "$(dirname "$0")"/.. 
