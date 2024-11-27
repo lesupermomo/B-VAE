@@ -5,21 +5,28 @@ Codebase builds upon [WonKwang Lee and Tony Metger] [1] , where I introduce key 
 ```markdown
 
 |------ Dataset Management
-|              |---- Integrated scripts to automatically download datasets (3DChairs and CelebA) with a single command.
+|              |---- Integrated scripts to automatically download datasets (3DChairs and CelebA)
+                      with a single command.
 
 |------ Code Compatibility and Optimization
-|              |---- Updated the codebase to be compatible with the latest version of PyTorch, enhancing scalability and performance.
-|              |---- Refactored the code to remove unnecessary methods and ensure smooth execution regardless of the working directory from which `main.py` is called.
+|              |---- Updated the codebase to be compatible with the latest version of PyTorch,
+                      enhancing scalability and performance.
+|              |---- Refactored the code to remove unnecessary methods and ensure smooth execution
+                      regardless of the working directory from which `main.py` is called.
 
 |------ GPU Selection
-|              |---- Enabled GPU selection to allow running experiments on specified GPUs, providing flexibility for multi-GPU environments.
+|              |---- Enabled GPU selection to allow running experiments on specified GPUs,
+                      providing flexibility for multi-GPU environments.
 
 |------ Project Organization
-|              |---- Created a dedicated `scripts/` directory to streamline the setup and execution of experiments.
-|              |---- Added a `requirements.txt` file that includes all project dependencies for easy environment setup.
+|              |---- Created a dedicated `scripts/` directory to streamline the setup
+                      and execution of experiments.
+|              |---- Added a `requirements.txt` file that includes all project dependencies
+                      for easy environment setup.
 
 |------ Documentation and Reproducibility
-|              |---- Developed detailed documentation on how to set up the environment and reproduce experimental results.
+|              |---- Developed detailed documentation on how to set up the environment
+                      and reproduce experimental results.
 ```
 
 
