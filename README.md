@@ -1,7 +1,7 @@
 # β-VAE
-Github code builds upon [WonKwang Lee and Tony Metger] [1] , introducing key improvements for usability, reproducibility, and performance:
+Codebase builds upon [WonKwang Lee and Tony Metger] [1] , where I introduce key improvements for usability, reproducibility, and performance:
 
-### Contributions
+### My Contributions
 ```markdown
 
 |------ Dataset Management
