@@ -4,3 +4,4 @@ torchvision==0.20.1
 tqdm==4.67.0
 visdom==0.2.4
 gdown==5.2.0
+imageio==2.36.1
