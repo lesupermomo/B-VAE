@@ -12,8 +12,9 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.autograd import Variable
 from torchvision.utils import make_grid, save_image
+import imageio
 
-from utils import cuda, grid2gif
+from utils import cuda
 from model import BetaVAE_H, BetaVAE_B
 from dataset import return_data
 
@@ -420,14 +421,18 @@ class Solver(object):
             gifs = torch.cat(gifs)
             gifs = gifs.view(len(Z), self.z_dim, len(interpolation), self.nc, 64, 64).transpose(1, 2)
             for i, key in enumerate(Z.keys()):
+                images = []  
                 for j, val in enumerate(interpolation):
+                    img_path = os.path.join(output_dir, f'{key}_{j}.jpg')
                     save_image(tensor=gifs[i][j].cpu(),
-                               fp=os.path.join(output_dir, '{}_{}.jpg'.format(key, j)),
+                               fp=img_path,
                                nrow=self.z_dim, pad_value=1)
+                    images.append(imageio.imread(img_path))
 
-                grid2gif(os.path.join(output_dir, key+'*.jpg'),
-                         os.path.join(output_dir, key+'.gif'), delay=10)
-
+                images.extend([imageio.imread(img_path)] * 10)
+                gif_path = os.path.join(output_dir, f'{key}.gif')
+                imageio.mimsave(gif_path, images, duration=0.1)
+                
         self.net_mode(train=True)
 
     def net_mode(self, train):

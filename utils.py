@@ -31,13 +31,3 @@ def where(cond, x, y):
     """
     cond = cond.float()
     return (cond*x) + ((1-cond)*y)
-
-
-def grid2gif(image_str, output_gif, delay=100):
-    """Make GIF from images.
-
-    code from:
-        https://stackoverflow.com/questions/753190/programmatically-generate-video-or-animated-gif-in-python/34555939#34555939
-    """
-    str1 = 'convert -delay '+str(delay)+' -loop 0 ' + image_str  + ' ' + output_gif
-    subprocess.call(str1, shell=True)
