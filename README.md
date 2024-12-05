@@ -8,6 +8,11 @@ Codebase builds upon [WonKwang Lee and Tony Metger] [1] , where I introduce key 
 |              |---- Integrated scripts to automatically download datasets (3DChairs and CelebA)
                       with a single command.
 
+|------ New Features and bug fixes
+|              |---- Fixed a bug related to ploting the posterior mean.
+|              |---- Updated the plot gif method to use `imageio` insteaf of `grid2gif` to 
+                      enhance scalability of the codebase.
+
 |------ Code Compatibility and Optimization
 |              |---- Updated the codebase to be compatible with the latest version of PyTorch,
                       enhancing scalability and performance.
