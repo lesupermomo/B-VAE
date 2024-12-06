@@ -103,7 +103,7 @@ This will initiate the experiment with the specified parameters.
 
 | latent traversal |
 |-----------------------------|
-| <p align="center"> <img src=misc/dsprites_traverse_ellipse.gif> <img src=misc/dsprites_traverse_heart.gif> <img src=misc/dsprites_traverse_random.gif> </p>|
+| <p align="center"><img src=misc/dsprites_traverse_ellipse.gif> <img src=misc/dsprites_traverse_heart.gif> <img src=misc/dsprites_traverse_random.gif></p>|
 
 
 | Input Image vs Reconstruction |
@@ -115,23 +115,20 @@ This will initiate the experiment with the specified parameters.
 ```
 ./scripts/run_3dchairs_H_beta4_z10.sh
 ```
-![3dchairs_beta4_z16](misc/3dchairs_H_beta4_z10_traverse.png)
-```
-./scripts/run_3dchairs_H_beta4_z16.sh
-```
-![3dchairs_beta4_z16](misc/3dchairs_H_beta4_z16_traverse.png)
+
+| latent traversal |
+|-----------------------------|
+| <p align="center"><img src="misc/3dchairs_H_beta4_z10_traverse.png"> </p> |
+
 
 
 #### CelebA
 ```
 ./scripts/run_celeba_H_beta10_z10.sh
 ```
-![celeba](misc/celeba_H_beta10_z10_traverse.png)
-```
-./scripts/run_celeba_H_beta10_z32.sh
-```
-![celeba](misc/celeba_H_beta10_z32_traverse.png)
-
+| latent traversal |
+|-----------------------------|
+| <p align="center"><img src="misc/celeba_H_beta10_z10_traverse.png"> </p> |
 
 
 ### Reference
